@@ -8,7 +8,7 @@ import SecondStepOfCreatingInvoice from './StartCreatingInvoiceComponents/Second
 
 const CreateInvoice = () => {
 	const [chosenCategory, setChosenCategory] = useState("");
-	const [proceed, setProceed] = useState(false);
+	const [proceed, setProceed] = useState(false); 
 	const [idNumber, setIdNumber] = useState("");
 	const [address, setAddress] = useState("");
 	const [mobileNumber, setMobileNumber] = useState("");
