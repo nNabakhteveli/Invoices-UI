@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import queryString from "query-string";
 
-import InputField from "./CreateInvoiceComponents/InputField";
-import NextStepOrSaveButton from './CreateInvoiceComponents/NextStepOrSaveButton';
-import SecondStepOfCreatingInvoice from './CreateInvoiceComponents/SecondStepOfCreatingInvoice';
+import InputField from "./StartCreatingInvoiceComponents/InputField";
+import NextStepOrSaveButton from './StartCreatingInvoiceComponents/NextStepOrSaveButton';
+import SecondStepOfCreatingInvoice from './StartCreatingInvoiceComponents/SecondStepOfCreatingInvoice';
 
 const CreateInvoice = () => {
 	const [chosenCategory, setChosenCategory] = useState("");

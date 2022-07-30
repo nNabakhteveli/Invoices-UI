@@ -9,11 +9,10 @@ const SecondStepOfCreatingInvoice = ({ formDataHandler }) => {
 				fieldName="branch"
 				placeholder="აირჩიე ფილიალი"
 				optionsList={[
-					"ფილიალი 1",
-					"ფილიალი 2",
-					"ფილიალი 3",
-					"ფილიალი 4",
-					"ფილიალი 5",
+					"ვაკის ფილიალი",
+					"საბურთალოს ფილიალი",
+					"დიღომის ფილიალი",
+					"ვარკეთილის ფილიალი"
 				]}
 			/>
 
