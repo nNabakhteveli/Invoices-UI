@@ -1,10 +1,19 @@
+import { useState } from "react";
 import TableHeader from "./InvoicesListPageComponents/TableHeader";
 import TableRowItem from './InvoicesListPageComponents/TableRowItem';
 import invoices from './InvoicesListPageComponents/invoicesData';
+import SendEmailPopup from './InvoicesListPageComponents/SendEmailPopup';
 
 const InvoicesListPage = () => {
+	const [showPopup, setShowPopup] = useState(false);
+
+	const togglePopup = () => {
+		setShowPopup(true);
+	}
+
 	return (
 		<div className="px-4 sm:px-6 lg:px-8">
+			{ showPopup ? <SendEmailPopup changePopupState={setShowPopup} /> : null }
 			<div className="sm:flex sm:items-center">
 				<div className="sm:flex-auto">
 					<h1 className="text-xl font-semibold text-gray-900 mt-4">არსებული ინვოისები</h1>
@@ -30,7 +39,7 @@ const InvoicesListPage = () => {
 								<tbody className="bg-white">
 									{invoices.map((person, personIdx) => (
 										<tr
-											key={person.email}
+											key={personIdx}
 											className={
 												personIdx % 2 === 0
 													? undefined
@@ -44,6 +53,7 @@ const InvoicesListPage = () => {
 											<TableRowItem content={person.numberForCard} />
 											<TableRowItem content={person.branch} />
 											<TableRowItem content={person.paymentMethod} />
+											<button className="bg-gray-300 rounded mr-2" onClick={() => togglePopup()}>მეილზე გაგზავნა</button>
 										</tr>
 									))}
 								</tbody>
