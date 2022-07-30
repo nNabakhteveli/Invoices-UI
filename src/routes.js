@@ -3,6 +3,8 @@ import ChooseCategory from './components/ChooseCategories';
 import StartCreatingInvoice from './components/StartCreatingInvoice';
 import ProcoeedWithInvoiceCreation from './components/ProceedWithInvoiceCreation';
 import NotFoundResponse from './components/NotFoundResponse';
+import InvoicesListPage from './components/InvoicesListPage';
+import Navbar from './components/Navbar';
 
 import categoriesData from "./categoryComponentsData";
 
@@ -13,16 +15,32 @@ const routes = [
 		element: <LoginPage />
 	},
 	{
-		path: "/categories",
-		element: <ChooseCategory categoriesData={categoriesData} />
+		path: "/choose-category",
+		element: 
+		<>
+		<Navbar />
+		<ChooseCategory categoriesData={categoriesData} />
+		</>
 	},
 	{
 		path: "/create-invoice",
-		element: <StartCreatingInvoice />
+		element:
+		<>
+			<Navbar />
+			<StartCreatingInvoice />
+		</>
 	},
 	{
 		path: "/proceed-with-invoice-creation",
 		element: <ProcoeedWithInvoiceCreation />
+	},
+	{
+		path: "/invoices-list",
+		element: 
+		<>
+		<Navbar activeItem='invoice-list' />
+		<InvoicesListPage />
+		</>
 	},
 	{
 		path: "*",
