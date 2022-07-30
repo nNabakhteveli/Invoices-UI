@@ -46,7 +46,7 @@ const ChooseCategory = ({ categoriesData }) => {
 											{singleCategory.name}
 										</a>
 										<p className="text-gray-500">
-											{singleCategory.subCategoryCount} ქვეკატეგორია
+											{singleCategory.children.length} ქვეკატეგორია
 										</p>
 									</div>
 									<ChevronDownIcon

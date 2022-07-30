@@ -3,7 +3,6 @@ export default [
 		name: "ფიზიკური პირი",
 		initials: "GA",
 		href: "#",
-		subCategoryCount: 6,
 		bgColor: "bg-pink-600",
       children: [
          'საცალო გაყიდვები',
@@ -23,7 +22,7 @@ export default [
       children: [
          'ორგანიზაციები',
          'დღგ-სგან განთავისუფლებულები',
-         'დიპლომატი - ავტომატურად დააკლდეს 18%'
+         'დიპლომატი'
       ]
 	},
 	{
