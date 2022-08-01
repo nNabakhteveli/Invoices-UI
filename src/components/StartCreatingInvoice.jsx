@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SimpleSingleListItem } from "./StartCreatingInvoiceComponents/SingleListItem";
 import { RoundedInputField } from "./Input/InputField";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 import InvoiceUserDetails from './InvoiceUserDetails';
@@ -166,7 +166,7 @@ const StartCreatingInvoice = () => {
 	};
 
 	return (
-		<div className="h-3/4">
+		<div className="h-3/4 scroll-smooth">
 			<div className="mt-10 flex-row">
 				<div className="flex justify-around">
 					{categoriesArr.map((category, index) => (
@@ -223,8 +223,8 @@ const StartCreatingInvoice = () => {
 							</div>
 						</div>
 					</div>
-					<div className="flex mt-10 sm:mt-0 sm:ml-16 sm:flex-none justify-start">
-						<form className="space-y-8 divide-y divide-gray-200 bg-gray-200 p-5 rounded mt-5 px-5">
+					<div className="flex mt-10 sm:mt-0 sm:flex-none justify-start">
+						<form className="space-y-8 divide-y divide-gray-200 bg-gray-200 p-5 rounded mt-5 px-5 w-8/12">
 							<div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 								<div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
 									<div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import queryString from "query-string";
 
 import { SquareInputField } from "./Input/InputField";
@@ -16,6 +16,20 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 	const [numberToFillCard, setNumberToFillCard] = useState("");
 	const [branch, setBranch] = useState("");
 	const [paymentMethod, setPaymentMethod] = useState("");
+	const navigate = useNavigate();
+
+
+	const dataToPassNextComponent = {
+		address,
+		branch,
+		chosenGroup,
+		email,
+		idNumber,
+		mobileNumber,
+		numberForCard: numberToFillCard,
+		paymentMethod,
+		productsData
+	}
 
 	useEffect(() => {
 		const parsedQuery = queryString.parse(document.location.search);
@@ -83,8 +97,9 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 	}
 
 	return (
-		<div className="mt-10 sm:mt-0 flex h-screen ml-10 items-center">
+		<div className="mt-10 sm:mt-0 flex h-screen items-center">
 			<div className="md:grid md:gap-6">
+				<h1 className="font-semibold">ინფორმაცია მომხმარებელზე</h1>
 				<form>
 					<div className="shadow overflow-hidden sm:rounded-md">
 						<div className="px-4 py-5 bg-white sm:p-6">
@@ -137,7 +152,8 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 						) : (
 							<NextStepOrSaveButton
 								customClassName='ml-5 mb-5'
-								content={<Link to={urlToProceed}>შენახვა</Link>}
+								onClick={() => navigate(urlToProceed, { state: dataToPassNextComponent})}
+								content='შენახვა'
 							/>
 						)}
 					</div>
