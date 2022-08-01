@@ -6,7 +6,7 @@ import { nanoid } from "nanoid";
 import Button from './Button/Button';
 import SingleField from "./ProceedWithInvoiceCreationComponents/SingleField";
 
-const ProcoeedWithInvoiceCreation = () => {
+const ProceedWithInvoiceCreation = () => {
    const [isReadyForPrint, setIsReadyForPrint] = useState(false);
    const navigate = useNavigate();
 
@@ -83,4 +83,4 @@ const ProcoeedWithInvoiceCreation = () => {
 	);
 };
 
-export default ProcoeedWithInvoiceCreation;
+export default ProceedWithInvoiceCreation;

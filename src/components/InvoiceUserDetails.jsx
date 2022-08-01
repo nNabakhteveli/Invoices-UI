@@ -3,66 +3,87 @@ import { Link } from "react-router-dom";
 import queryString from "query-string";
 
 import { SquareInputField } from "./Input/InputField";
-import NextStepOrSaveButton from './InvoiceUserDetailsComponents/NextStepOrSaveButton';
-import SecondStepOfCreatingInvoice from './InvoiceUserDetailsComponents/SecondStepOfCreatingInvoice';
+import NextStepOrSaveButton from "./InvoiceUserDetailsComponents/NextStepOrSaveButton";
+import SecondStepOfCreatingInvoice from "./InvoiceUserDetailsComponents/SecondStepOfCreatingInvoice";
 
-const CreateInvoice = () => {
+const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFromFirstStep }) => {
 	const [chosenGroup, setChosenGroup] = useState("");
-	const [proceed, setProceed] = useState(false); 
+	const [proceed, setProceed] = useState(false);
 	const [idNumber, setIdNumber] = useState("");
 	const [address, setAddress] = useState("");
 	const [mobileNumber, setMobileNumber] = useState("");
 	const [email, setEmail] = useState("");
 	const [numberToFillCard, setNumberToFillCard] = useState("");
 	const [branch, setBranch] = useState("");
-   const [paymentMethod, setPaymentMethod] = useState('');
-	
+	const [paymentMethod, setPaymentMethod] = useState("");
 
 	useEffect(() => {
 		const parsedQuery = queryString.parse(document.location.search);
+		console.log(parsedQuery);
 		setChosenGroup(parsedQuery.group);
 	}, []);
 
-   
 	const formDataHandler = (action, data) => {
-      switch (action) {
-         case "id-number":
-            return setIdNumber(data);     
+		switch (action) {
+			case "id-number":
+				return setIdNumber(data);
 
-         case "address":
-            return setAddress(data);
-         
-         case "phone-number":
-            return setMobileNumber(data);
+			case "address":
+				return setAddress(data);
 
-         case "email":
-            return setEmail(data);
+			case "phone-number":
+				return setMobileNumber(data);
 
-         case "number-for-card":
-            return setNumberToFillCard(data);
+			case "email":
+				return setEmail(data);
 
-         case "branch":
-            return setBranch(data);
+			case "number-for-card":
+				return setNumberToFillCard(data);
 
-         case "payment-method":
-            return setPaymentMethod(data);
+			case "branch":
+				return setBranch(data);
 
-         default:
-            break;
-      }
+			case "payment-method":
+				return setPaymentMethod(data);
+
+			default:
+				break;
+		}
 	};
 
-   const referenceToFormDataHandler = formDataHandler;
+	const referenceToFormDataHandler = formDataHandler;
 
 	const nextStepHandler = e => {
 		e.preventDefault();
 		setProceed(true);
 	};
 
-	const urlToProceed = `/proceed-with-invoice-creation?idNumber=${idNumber}&address=${address}&mobileNumber=${mobileNumber}&email=${email}&numberForCard=${numberToFillCard}&branch=${branch}&chosenGroup=${chosenGroup}&paymentMethod=${paymentMethod}`;
+	let urlToProceed = `
+	proceed-with-invoice-creation?idNumber=${idNumber}&address=${address}&mobileNumber=${mobileNumber}&email=${email}&numberForCard=${numberToFillCard}&branch=${branch}&chosenGroup=${chosenGroup}&paymentMethod=${paymentMethod}
+	`;
+
+	if (chosenGroupFromFirstStep) {
+		urlToProceed += `&chosenGroup=${chosenGroupFromFirstStep}`;
+	}
+
+	if (productsData.length) {
+		urlToProceed += `&productsData=${productsData}`;
+	}
+
+	if (insts.length) {
+		urlToProceed += `&instalments=${insts}`;
+	}
+
+	if (vouchers.length) {
+		urlToProceed += `&vouchers=${vouchers}`;
+	}
+
+	if (websites.length) {
+		urlToProceed += `&websites=${websites}`;
+	}
 
 	return (
-		<div className="mt-10 sm:mt-0 flex h-screen justify-center items-center">
+		<div className="mt-10 sm:mt-0 flex h-screen ml-10 items-center">
 			<div className="md:grid md:gap-6">
 				<form>
 					<div className="shadow overflow-hidden sm:rounded-md">
@@ -106,14 +127,19 @@ const CreateInvoice = () => {
 							) : null}
 						</div>
 
-						<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-							{
-							!proceed ? 
-							<NextStepOrSaveButton onClick={e => nextStepHandler(e)} content='შემდეგი' /> 
-							: 
-							<NextStepOrSaveButton content={<Link to={urlToProceed}>შენახვა</Link>} />
-							}
-						</div>
+						<div className="px-4 py-3 bg-gray-50 text-right sm:px-6"></div>
+						{!proceed ? (
+							<NextStepOrSaveButton
+								onClick={e => nextStepHandler(e)}
+								content="შემდეგი"
+								customClassName='ml-5 mb-5'
+							/>
+						) : (
+							<NextStepOrSaveButton
+								customClassName='ml-5 mb-5'
+								content={<Link to={urlToProceed}>შენახვა</Link>}
+							/>
+						)}
 					</div>
 				</form>
 			</div>

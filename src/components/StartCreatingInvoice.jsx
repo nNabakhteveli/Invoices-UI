@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { SimpleSingleListItem } from "./StartCreatingInvoiceComponents/SingleListItem";
 import { RoundedInputField } from "./Input/InputField";
 import { useNavigate } from "react-router-dom";
+import queryString from "query-string";
+
+import InvoiceUserDetails from './InvoiceUserDetails';
 import Button from "./Button/Button";
 import TableRowItem from "./Table/TableRowItem";
 import TableHeader from "./Table/TableHeader";
@@ -90,12 +93,23 @@ const categoriesArr = [instalments, vouchers, websites];
 
 const StartCreatingInvoice = () => {
 	const [addedItems, setAddedItems] = useState([]);
+	const [incomingQuery, setIncomingQuery] = useState('');
 	const [nameForCertainItem, setNameForCertainItem] = useState("");
 	const [priceForCertainItem, setPriceForCertainItem] = useState("");
 	const [oneTimeSaleForCertainItem, setOneTimeSaleForCertainItem] =
 		useState("");
+	const [insts, setInsts] = useState([]);
+	const [vouchs, setVouchs] = useState([]);
+	const [webs, setWebsites] = useState([]);
 	const [searchProductWithCode, setSearchProductWithCode] = useState("");
-	const navigate = useNavigate();
+	const [showNextStep, setShowNextStep] = useState(false);
+	// const navigate = useNavigate();
+
+
+	useEffect(() => {
+		const parsedQuery = queryString.parse(document.location.search);
+		setIncomingQuery(parsedQuery.group);
+	}, []);
 
 	const setAddItemsHandler = () => {
 		setAddedItems(
@@ -143,7 +157,12 @@ const StartCreatingInvoice = () => {
 				websitesTemp.push(websites.listOfCategories[i].name);
 			}
 		}
-		return navigate(`/add-user-details-to-invoice?a=${addedItems}`, { replace: true })
+		setShowNextStep(true);
+
+		setInsts(installsTemp);
+		setVouchs(vouchersTemp);
+		setWebsites(websitesTemp);
+
 	};
 
 	return (
@@ -221,7 +240,6 @@ const StartCreatingInvoice = () => {
 											}
 											type="text"
 											value={nameForCertainItem}
-											required={true}
 										/>
 										<RoundedInputField
 											placeholder="ფასი"
@@ -230,7 +248,6 @@ const StartCreatingInvoice = () => {
 											}
 											value={priceForCertainItem}
 											type="number"
-											required={true}
 										/>
 										<RoundedInputField
 											placeholder="ერთჯერადი ფასდაკლება"
@@ -239,7 +256,6 @@ const StartCreatingInvoice = () => {
 											}
 											value={oneTimeSaleForCertainItem}
 											type="number"
-											required={true}
 										/>
 										<RoundedInputField
 											placeholder="პროდუქტის კოდით მოძებნა"
@@ -248,7 +264,6 @@ const StartCreatingInvoice = () => {
 											}
 											value={searchProductWithCode}
 											type="number"
-											required={true}
 										/>
 									</div>
 								</div>
@@ -266,13 +281,14 @@ const StartCreatingInvoice = () => {
 							</div>
 						</form>
 					</div>
+				{ showNextStep ? <InvoiceUserDetails productsData={addedItems} insts={insts} vouchers={vouchs} websites={webs} chosenGroupFromFirstStep={incomingQuery} /> : null }
 				</div>
 			</div>
-			<Button
+			{ !showNextStep ? <Button
 				content="შემდეგი"
 				onClick={() => continueOnNextPage()}
 				customClassName="float-right mr-6"
-			/>
+			/> : null }
 		</div>
 	);
 };

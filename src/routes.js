@@ -42,7 +42,7 @@ const routes = [
 		</>
 	},
 	{
-		path: "/proceed-with-invoice-creation",
+		path: "/start-creating-invoice/proceed-with-invoice-creation",
 		element: <ProcoeedWithInvoiceCreation />
 	},
 	{
