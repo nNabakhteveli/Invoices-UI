@@ -1,7 +1,6 @@
 export default [
 	{
 		name: "ფიზიკური პირი",
-		href: "#",
       children: [
          'საცალო გაყიდვები',
          'ფასდაკლება',
@@ -13,7 +12,6 @@ export default [
 	},
 	{
 		name: "იურიდიული პირი",
-		href: "#",
 		subCategoryCount: 3,
       children: [
          'ორგანიზაციები',
@@ -23,7 +21,7 @@ export default [
 	},
 	{
 		name: "დიპლომატი",
-		href: "#",
+		href: "/start-creating-invoice?group=დიპლომატი",
 		subCategoryCount: 3,
 		bgColor: "bg-pink-600",
       children: []

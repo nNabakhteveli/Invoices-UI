@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const classNames = (...classes) => {
 	return classes.filter(Boolean).join(" ");
@@ -25,6 +25,7 @@ const SingleDropdownItem = ({ fieldName }) => {
 };
 
 const ChooseCategory = ({ categoriesData }) => {
+	const navigate = useNavigate();
 	return (
 		<>
 			<p className="text-center text-2xl">აირჩიე ჯგუფი</p>
@@ -40,25 +41,43 @@ const ChooseCategory = ({ categoriesData }) => {
 							<Menu
 								as="div"
 								className="flex-1 items-center border-t border-r border-b border-gray-200">
-								<div>
-									<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 z-0">
-										<div className="flex-1 px-4 py-2 text-sm truncate">
-											<a
-												href={singleCategory.href}
-												className="text-gray-900 font-medium hover:text-gray-600">
-												{singleCategory.name}
-											</a>
-											<p className="text-gray-500">
-												{singleCategory.children.length}{" "}
-												ქვეკატეგორია
-											</p>
-										</div>
-										<ChevronDownIcon
-											className="-mr-1 ml-2 h-5 w-5"
-											aria-hidden="true"
-										/>
-									</Menu.Button>
-								</div>
+								{singleCategory.href ? (
+									<div onClick={() => navigate(singleCategory.href, { replace: true })}>
+										<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 z-0">
+											<div className="flex-1 px-4 py-2 text-sm truncate">
+												<a className="text-gray-900 font-medium hover:text-gray-600">
+													{singleCategory.name}
+												</a>
+												<p className="text-gray-500">
+													{singleCategory.children.length}{" "}
+													ქვეკატეგორია
+												</p>
+											</div>
+											<ChevronDownIcon
+												className="-mr-1 ml-2 h-5 w-5"
+												aria-hidden="true"
+											/>
+										</Menu.Button>
+									</div>
+								) : (
+									<div>
+										<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 z-0">
+											<div className="flex-1 px-4 py-2 text-sm truncate">
+												<a className="text-gray-900 font-medium hover:text-gray-600">
+													{singleCategory.name}
+												</a>
+												<p className="text-gray-500">
+													{singleCategory.children.length}{" "}
+													ქვეკატეგორია
+												</p>
+											</div>
+											<ChevronDownIcon
+												className="-mr-1 ml-2 h-5 w-5"
+												aria-hidden="true"
+											/>
+										</Menu.Button>
+									</div>
+								)}
 								<Transition
 									as={Fragment}
 									enter="transition ease-out duration-100"

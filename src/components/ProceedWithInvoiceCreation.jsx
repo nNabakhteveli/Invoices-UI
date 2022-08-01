@@ -30,7 +30,13 @@ const ProceedWithInvoiceCreation = () => {
 		setIsReadyForPrint(false);
 	}, [isReadyForPrint]);
 
-	const sumOfProducts = productsData.reduce((a, b) => a.price + b.price);
+	let sumOfProducts = productsData.reduce(
+		(a, b) => parseInt(a.price) + parseInt(b.price)
+	);
+
+	if (chosenGroup === "დიპლომატი") {
+		sumOfProducts = sumOfProducts - (18 * (sumOfProducts / 100));
+	}
 
 	return (
 		<div className="px-4 sm:px-6 lg:px-8">
@@ -39,19 +45,21 @@ const ProceedWithInvoiceCreation = () => {
 				onClick={() => navigate("/choose-group", { replace: true })}
 				content="უკან დაბრუნება"
 			/>
-			<div className="sm:flex sm:items-center">
+			<div className="sm:flex sm:items-center flex">
 				<div className="sm:flex-auto">
 					<h1 className="text-xl font-semibold text-gray-900">ინვოისი</h1>
 
-					<p className="mt-2 text-sm text-gray-700">
-						ინვოისის ინდივიდუალური ნომერი: {nanoid(10)}
-					</p>
-					<p className="mt-2 text-sm text-gray-700">
-						თარიღი:{" "}
-						{new Date().toLocaleString("en-GB", {
-							timeZone: "Asia/Tbilisi",
-						})}
-					</p>
+					<div>
+						<p className="mt-2 text-sm text-gray-700">
+							ინვოისის ინდივიდუალური ნომერი: {nanoid(10)}
+						</p>
+						<p className="mt-2 text-sm text-gray-700">
+							თარიღი:{" "}
+							{new Date().toLocaleString("en-GB", {
+								timeZone: "Asia/Tbilisi",
+							})}
+						</p>
+					</div>
 				</div>
 			</div>
 			<div className="-mx-4 mt-8 flex flex-col sm:-mx-6 md:mx-0">
@@ -114,33 +122,15 @@ const ProceedWithInvoiceCreation = () => {
 						))}
 					</tbody>
 					<tfoot>
-						<tr>
-							<th
-								scope="row"
-								colSpan={3}
-								className="hidden pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell md:pl-0 font-bold">
-								ჯამი:
-							</th>
-							<td className="pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
-								{typeof sumOfProducts === 'object' ? sumOfProducts.price : sumOfProducts}
-							</td>
-						</tr>
-
 						{chosenGroup === "დიპლომატი" ? (
 							<tr>
-								<th
-									scope="row"
-									colSpan={3}
-									className="hidden pl-6 pr-3 pt-4 text-right text-sm font-normal text-gray-500 sm:table-cell md:pl-0">
-									-18% (დიპლომატი)
-								</th>
 								<th
 									scope="row"
 									className="pl-4 pr-3 pt-4 text-left text-sm font-normal text-gray-500 sm:hidden">
 									Discount
 								</th>
 								<td className="pl-3 pr-4 pt-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
-									$585.00
+									-18% (დიპლომატი)
 								</td>
 
 								<tr>
@@ -162,7 +152,19 @@ const ProceedWithInvoiceCreation = () => {
 									</td>
 								</tr>
 							</tr>
-						) : null}
+						) : <tr>
+						<th
+							scope="row"
+							colSpan={3}
+							className="hidden pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell md:pl-0 font-bold">
+							ჯამი:
+						</th>
+						<td className="pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
+							{typeof sumOfProducts === "object"
+								? sumOfProducts.price
+								: sumOfProducts}
+						</td>
+					</tr>}
 					</tfoot>
 				</table>
 			</div>

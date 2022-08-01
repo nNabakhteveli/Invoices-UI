@@ -1,66 +1,68 @@
-import LoginPage from './components/Login';
-import ChooseGroup from './components/ChooseGroup';
-import StartCreatingInvoice from './components/StartCreatingInvoice';
-import InvoiceUserDetails from './components/InvoiceUserDetails';
-import ProcoeedWithInvoiceCreation from './components/ProceedWithInvoiceCreation';
-import NotFoundResponse from './components/NotFoundResponse';
-import InvoicesListPage from './components/InvoicesListPage';
-import Navbar from './components/Navbar';
-// import StepsCount from './components/StepsCount';
+import LoginPage from "./components/Login";
+import ChooseGroup from "./components/ChooseGroup";
+import StartCreatingInvoice from "./components/StartCreatingInvoice";
+import InvoiceUserDetails from "./components/InvoiceUserDetails";
+import ProcoeedWithInvoiceCreation from "./components/ProceedWithInvoiceCreation";
+import NotFoundResponse from "./components/NotFoundResponse";
+import InvoicesListPage from "./components/InvoicesListPage";
+import Navbar from "./components/Navbar";
+import StepsCount from './components/StepsCount';
 
-import categoriesData from "./categoryComponentsData";
+import groupsData from "./groupComponentsData";
 
 // Must add permissions for certain routes later
 const routes = [
 	{
 		path: "/",
-		element: <LoginPage />
+		element: <LoginPage />,
 	},
 	{
 		path: "/choose-group",
 		element: 
-		<>
-		<Navbar />
-		{/* <StepsCount /> */}
-		<ChooseGroup categoriesData={categoriesData} />
-		</>
+			<>
+				<Navbar />
+				<ChooseGroup categoriesData={groupsData} />
+			</>
+		,
 	},
 	{
 		path: "/start-creating-invoice",
-		element:
-		<>
-			<Navbar />
-			<StartCreatingInvoice />
-		</>
+		element: 
+			<>
+				<Navbar />
+				<StartCreatingInvoice />
+			</>
+		,
 	},
 	{
 		path: "/add-user-details-to-invoice",
-		element:
-		<>
-			<Navbar />
-			<InvoiceUserDetails />
-		</>
+		element: (
+			<>
+				<Navbar />
+				<InvoiceUserDetails />
+			</>
+		),
 	},
 	{
 		path: "/start-creating-invoice/proceed-with-invoice-creation",
-		element: <ProcoeedWithInvoiceCreation />
+		element: <ProcoeedWithInvoiceCreation />,
 	},
 	{
 		path: "/invoices-list",
-		element: 
-		<>
-		<Navbar activeItem='invoice-list' />
-		<InvoicesListPage />
-		</>
+		element: (
+			<>
+				<Navbar activeItem="invoice-list" />
+				<InvoicesListPage />
+			</>
+		),
 	},
 	{
 		path: "*",
-		element: <NotFoundResponse />
-	}
+		element: <NotFoundResponse />,
+	},
 ];
 
-export default routes
-	.map((route, index) => ({
-		id: index,
-		...route
-	}));
+export default routes.map((route, index) => ({
+	id: index,
+	...route,
+}));
