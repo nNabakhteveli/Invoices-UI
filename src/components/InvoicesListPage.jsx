@@ -1,6 +1,5 @@
 import { useState } from "react";
-import TableHeader from "./InvoicesListPageComponents/TableHeader";
-import TableRowItem from "./InvoicesListPageComponents/TableRowItem";
+import Table from "./InvoicesListPageComponents/Table";
 import invoices from "./InvoicesListPageComponents/invoicesData";
 import SendEmailPopup from "./InvoicesListPageComponents/SendEmailPopup";
 
@@ -20,8 +19,28 @@ const InvoicesListPage = () => {
 						არსებული ინვოისები
 					</h1>
 
+					<div className="relative">
+						<div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+							<svg
+								aria-hidden="true"
+								className="w-5 h-5 text-gray-500 dark:text-gray-400"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									fill-rule="evenodd"
+									d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+									clip-rule="evenodd"></path>
+							</svg>
+						</div>
+						<input
+							datepicker={true}
+							type="text"
+							className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							placeholder="Select date"
+						/>
+					</div>
 					<div className="mt-5">
-						<p>გაფილტვრა თარიღის მიხედვით</p>
 						<input
 							name="start"
 							type="date"
@@ -31,55 +50,7 @@ const InvoicesListPage = () => {
 					</div>
 				</div>
 			</div>
-			<div className="mt-8 flex flex-col">
-				<div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-					<div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-						<div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-							<table className="min-w-full divide-y divide-gray-300">
-								<thead className="bg-gray-50">
-									<tr>
-										<TableHeader content="კატეგორია" />
-										<TableHeader content="პირადი / საიდ. ნომერი" />
-										<TableHeader content="ტელ.ნომერი" />
-										<TableHeader content="იმეილი" />
-										<TableHeader content="მისამართი" />
-										<TableHeader content="ლოიალ.ბარათის ნომერი" />
-										<TableHeader content="ფილიალი" />
-										<TableHeader content="გადახდის მეთოდი" />
-									</tr>
-								</thead>
-								<tbody className="bg-white">
-									{invoices.map((person, personIdx) => (
-										<tr
-											key={personIdx}
-											className={
-												personIdx % 2 === 0
-													? undefined
-													: "bg-gray-50"
-											}>
-											<TableRowItem
-												content={person.chosenCategory}
-											/>
-											<TableRowItem content={person.idNumber} />
-											<TableRowItem content={person.mobileNumber} />
-											<TableRowItem content={person.email} />
-											<TableRowItem content={person.address} />
-											<TableRowItem content={person.numberForCard} />
-											<TableRowItem content={person.branch} />
-											<TableRowItem content={person.paymentMethod} />
-											<button
-												className="bg-gray-300 rounded mr-2"
-												onClick={() => togglePopup()}>
-												მეილზე გაგზავნა
-											</button>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Table data={invoices} togglePopup={togglePopup} />
 		</div>
 	);
 };

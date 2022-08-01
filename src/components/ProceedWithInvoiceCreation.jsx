@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import queryString from "query-string";
 import { nanoid } from "nanoid";
 
-import Button from './ProceedWithInvoiceCreationComponents/Button';
+import Button from './Button/Button';
 import SingleField from "./ProceedWithInvoiceCreationComponents/SingleField";
 
 const ProcoeedWithInvoiceCreation = () => {
@@ -14,7 +14,7 @@ const ProcoeedWithInvoiceCreation = () => {
 	const {
 		address,
 		branch,
-		chosenCategory,
+		chosenGroup,
 		email,
 		idNumber,
 		mobileNumber,
@@ -31,7 +31,7 @@ const ProcoeedWithInvoiceCreation = () => {
 
 	return (
 		<div>
-         <Button isReadyForPrint={isReadyForPrint} onClick={() => navigate('/choose-category', { replace: true })} content='უკან დაბრუნება' />
+         <Button isReadyForPrint={isReadyForPrint} onClick={() => navigate('/choose-group', { replace: true })} content='უკან დაბრუნება' />
 			<div className="bg-white shadow overflow-hidden sm:rounded-lg">
 				<div className="px-4 py-5 sm:px-6">
 					<div className="flex justify-between">
@@ -55,7 +55,7 @@ const ProcoeedWithInvoiceCreation = () => {
 				</div>
 				<div className="border-t border-gray-200 px-4 py-5 sm:px-6">
 					<dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-						<SingleField title="კატეგორია" content={chosenCategory} />
+						<SingleField title="კატეგორია" content={chosenGroup} />
 						<SingleField
 							title="პირადი / საიდენთიფიკაციო ნომერი"
 							content={idNumber}

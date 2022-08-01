@@ -1,9 +1,7 @@
 export default [
 	{
 		name: "ფიზიკური პირი",
-		initials: "GA",
 		href: "#",
-		bgColor: "bg-pink-600",
       children: [
          'საცალო გაყიდვები',
          'ფასდაკლება',
@@ -15,10 +13,8 @@ export default [
 	},
 	{
 		name: "იურიდიული პირი",
-		initials: "GA",
 		href: "#",
 		subCategoryCount: 3,
-		bgColor: "bg-pink-600",
       children: [
          'ორგანიზაციები',
          'დღგ-სგან განთავისუფლებულები',
@@ -26,53 +22,60 @@ export default [
       ]
 	},
 	{
-		name: "განვადებები",
-		initials: "GA",
+		name: "დიპლომატი",
 		href: "#",
-		subCategoryCount: 5,
-		bgColor: "bg-pink-600",
-      children: [
-         'ადგილზე განვადება',
-         'ონლაინ განვადება',
-         'კრედო განვადება',
-         'კრისტალი',
-         'ბოგ ქიუარ განვადება'
-      ]
-	},
-	{
-		name: "ქულები და ვაუჩერები",
-		initials: "GA",
-		href: "#",
-		subCategoryCount: 4,
-		bgColor: "bg-pink-600",
-      children: [
-         '+ქულები',
-         'mr ქულები',
-         'tbs ერთგული',
-         'სასაჩუქრე ვაუჩერები'
-      ]
-	},
-	{
-		name: "ონლაინ გარე საიტები",
-		initials: "GA",
-		href: "#",
-		subCategoryCount: 6,
-		bgColor: "bg-pink-600",
-      children: [
-         'ვოლტი',
-         'გლოვო',
-         'მაიმარკეტი',
-         'ვენდუ',
-         'ონოფი',
-         'ექსტრა'
-      ]
-	},
-	{
-		name: "წინასწარი შეკვეთა",
-		initials: "GA",
-		href: "#",
-		subCategoryCount: 0,
+		subCategoryCount: 3,
 		bgColor: "bg-pink-600",
       children: []
 	},
+	// {
+	// 	name: "განვადებები",
+	// 	initials: "GA",
+	// 	href: "#",
+	// 	subCategoryCount: 5,
+	// 	bgColor: "bg-pink-600",
+   //    children: [
+   //       'ადგილზე განვადება',
+   //       'ონლაინ განვადება',
+   //       'კრედო განვადება',
+   //       'კრისტალი',
+   //       'ბოგ ქიუარ განვადება'
+   //    ]
+	// },
+	// {
+	// 	name: "ქულები და ვაუჩერები",
+	// 	initials: "GA",
+	// 	href: "#",
+	// 	subCategoryCount: 4,
+	// 	bgColor: "bg-pink-600",
+   //    children: [
+   //       '+ქულები',
+   //       'mr ქულები',
+   //       'tbs ერთგული',
+   //       'სასაჩუქრე ვაუჩერები'
+   //    ]
+	// },
+	// {
+	// 	name: "ონლაინ გარე საიტები",
+	// 	initials: "GA",
+	// 	href: "#",
+	// 	subCategoryCount: 6,
+	// 	bgColor: "bg-pink-600",
+   //    children: [
+   //       'ვოლტი',
+   //       'გლოვო',
+   //       'მაიმარკეტი',
+   //       'ვენდუ',
+   //       'ონოფი',
+   //       'ექსტრა'
+   //    ]
+	// },
+	// {
+	// 	name: "წინასწარი შეკვეთა",
+	// 	initials: "GA",
+	// 	href: "#",
+	// 	subCategoryCount: 0,
+	// 	bgColor: "bg-pink-600",
+   //    children: []
+	// },
 ];

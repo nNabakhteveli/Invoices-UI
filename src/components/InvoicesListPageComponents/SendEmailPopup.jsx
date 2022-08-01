@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import InputField from "../StartCreatingInvoiceComponents/InputField";
+import { SquareInputField } from "../Input/InputField";
 
 const SendEmailPopup = ({ changePopupState }) => {
 	const [open, setOpen] = useState(true);
@@ -49,7 +49,7 @@ const SendEmailPopup = ({ changePopupState }) => {
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
 							<Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full sm:p-6">
 								<div>
-									<InputField
+									<SquareInputField
 										type="email"
 										fieldName="email"
 										required={true}

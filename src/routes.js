@@ -1,10 +1,12 @@
 import LoginPage from './components/Login';
-import ChooseCategory from './components/ChooseCategories';
+import ChooseGroup from './components/ChooseGroup';
 import StartCreatingInvoice from './components/StartCreatingInvoice';
+import InvoiceUserDetails from './components/InvoiceUserDetails';
 import ProcoeedWithInvoiceCreation from './components/ProceedWithInvoiceCreation';
 import NotFoundResponse from './components/NotFoundResponse';
 import InvoicesListPage from './components/InvoicesListPage';
 import Navbar from './components/Navbar';
+// import StepsCount from './components/StepsCount';
 
 import categoriesData from "./categoryComponentsData";
 
@@ -15,19 +17,28 @@ const routes = [
 		element: <LoginPage />
 	},
 	{
-		path: "/choose-category",
+		path: "/choose-group",
 		element: 
 		<>
 		<Navbar />
-		<ChooseCategory categoriesData={categoriesData} />
+		{/* <StepsCount /> */}
+		<ChooseGroup categoriesData={categoriesData} />
 		</>
 	},
 	{
-		path: "/create-invoice",
+		path: "/start-creating-invoice",
 		element:
 		<>
 			<Navbar />
 			<StartCreatingInvoice />
+		</>
+	},
+	{
+		path: "/add-user-details-to-invoice",
+		element:
+		<>
+			<Navbar />
+			<InvoiceUserDetails />
 		</>
 	},
 	{
