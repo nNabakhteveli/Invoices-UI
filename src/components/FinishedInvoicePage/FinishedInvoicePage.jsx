@@ -152,7 +152,7 @@ const ProceedWithInvoiceCreation = () => {
 								</td>
 								<td className="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
 								{
-									product.oneTimeSale ? product.price - +product.oneTimeSale : product.price
+									product.oneTimeSale ? `${product.price - +product.oneTimeSale} (ერთჯერადი ფასდაკლება -${product.oneTimeSale})` : product.price
 								}
 								</td>
 							</tr>
