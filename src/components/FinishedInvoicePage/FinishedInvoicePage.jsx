@@ -20,6 +20,9 @@ const ProceedWithInvoiceCreation = () => {
 		numberForCard,
 		paymentMethod,
 		productsData,
+		instalments,
+		vouchers,
+		websites,
 	} = state;
 
 	useEffect(() => {
@@ -29,12 +32,16 @@ const ProceedWithInvoiceCreation = () => {
 		setIsReadyForPrint(false);
 	}, [isReadyForPrint]);
 
-	let sumOfProducts = productsData.reduce((a, b) => (a + +b.price), 0);
+	let sumOfProducts = productsData.reduce((a, b) => a + +b.price, 0);
 
 	if (chosenGroup === "დიპლომატი") {
-		sumOfProducts = sumOfProducts - (18 * (sumOfProducts / 100));
+		sumOfProducts = sumOfProducts - 18 * (sumOfProducts / 100);
 	}
 
+	const argumentForToFixed = 2;
+
+	const classNameForDls = 'flex flex-col gap-8'
+	/* "grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2" */
 	return (
 		<div className="px-4 sm:px-6 lg:px-8">
 			<Button
@@ -62,18 +69,21 @@ const ProceedWithInvoiceCreation = () => {
 			<div className="-mx-4 mt-8 flex flex-col sm:-mx-6 md:mx-0">
 				<div>
 					<div className="bg-white shadow overflow-hidden sm:rounded-lg">
-						<div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-							<dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+						<div className="border-t border-gray-200 px-4 py-5 sm:px-6 flex justify-between">
+							<dl className={classNameForDls}>
 								<SingleField title="კატეგორია" content={chosenGroup} />
 								<SingleField
 									title="პირადი / საიდენთიფიკაციო ნომერი"
 									content={idNumber}
 								/>
 								<SingleField title="იმეილი" content={email} />
+
 								<SingleField
 									title="მობილურის ნომერი"
 									content={mobileNumber}
 								/>
+							</dl>
+							<dl className={classNameForDls}>
 								<SingleField title="მისამართი" content={address} />
 								<SingleField
 									title="ლოიალობის ბარათის შესავსები ნომერი"
@@ -83,6 +93,23 @@ const ProceedWithInvoiceCreation = () => {
 								<SingleField
 									title="გადახდის მეთოდი"
 									content={paymentMethod}
+								/>
+							</dl>
+
+							<dl className={classNameForDls}>
+								<SingleField
+									title="განვადებები"
+									content={instalments}
+								/>
+
+								<SingleField
+									title="ქულები და ვაუჩერები"
+									content={vouchers}
+								/>
+
+								<SingleField
+									title="ონლაინ გარე საიტები"
+									content={websites}
 								/>
 							</dl>
 						</div>
@@ -144,24 +171,26 @@ const ProceedWithInvoiceCreation = () => {
 									</th>
 									<td className="pl-3 pr-4 pt-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0">
 										{typeof sumOfProducts === "object"
-											? sumOfProducts.price
-											: sumOfProducts}
+											? +sumOfProducts.price.toFixed(argumentForToFixed)
+											: +sumOfProducts.toFixed(argumentForToFixed)}
 									</td>
 								</tr>
 							</tr>
-						) : <tr>
-						<th
-							scope="row"
-							colSpan={3}
-							className="hidden pt-6 text-right text-sm text-gray-500 sm:table-cell md:pl-0 font-bold">
-							ჯამი:
-						</th>
-						<td className="pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
-							{typeof sumOfProducts === "object"
-								? sumOfProducts.price
-								: sumOfProducts}
-						</td>
-					</tr>}
+						) : (
+							<tr>
+								<th
+									scope="row"
+									colSpan={3}
+									className="hidden pt-6 text-right text-sm text-gray-500 sm:table-cell md:pl-0 font-bold">
+									ჯამი:
+								</th>
+								<td className="pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
+									{typeof sumOfProducts === "object"
+										? +sumOfProducts.price.toFixed(argumentForToFixed)
+										: +sumOfProducts.toFixed(argumentForToFixed)}
+								</td>
+							</tr>
+						)}
 					</tfoot>
 				</table>
 			</div>

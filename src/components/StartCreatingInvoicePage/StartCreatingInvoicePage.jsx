@@ -4,87 +4,10 @@ import queryString from "query-string";
 import { Button, TableHeader, TableRowItem, RoundedInputField } from "components/Common";
 import { SimpleSingleListItem } from "./SingleListItem";
 import { UserDetailsForm } from "components/UserDetailsForm";
-
-
 import ListRow from "./ListRow";
 
-const instalments = {
-	headerName: "განვადებები",
-	listOfCategories: [
-		{
-			name: "ადგილზე განვადება",
-			isChecked: false,
-		},
-		{
-			name: "ონლაინ განვადება",
-			isChecked: false,
-		},
-		{
-			name: "კრედო განვადება",
-			isChecked: false,
-		},
-		{
-			name: "კრისტალი",
-			isChecked: false,
-		},
-		{
-			name: "ბოგ ქიუარ განვადება",
-			isChecked: false,
-		},
-	],
-};
+import { instalments, vouchers, websites } from './checkFields';
 
-const vouchers = {
-	headerName: "ქულები და ვაუჩერები",
-	listOfCategories: [
-		{
-			name: "+ქულები",
-			isChecked: false,
-		},
-		{
-			name: "mr ქულები",
-			isChecked: false,
-		},
-		{
-			name: "tbc ერთგული",
-			isChecked: false,
-		},
-		{
-			name: "სასაჩუქრე ვაუჩერები",
-			isChecked: false,
-		},
-	],
-};
-
-const websites = {
-	headerName: "ონლაინ გარე საიტები",
-	listOfCategories: [
-		{
-			name: "ვოლტი",
-			isChecked: false,
-		},
-		{
-			name: "გლოვო",
-			isChecked: false,
-		},
-		{
-			name: "მაიმარკეტი",
-			isChecked: false,
-		},
-		{
-			name: "ვენდუ",
-			isChecked: false,
-		},
-		{
-			name: "ონოფი",
-			isChecked: false,
-		},
-		{
-			name: "ექსტრა",
-			isChecked: false,
-		},
-	],
-};
 
 const categoriesArr = [instalments, vouchers, websites];
 
@@ -95,9 +18,9 @@ const StartCreatingInvoicePage = () => {
 	const [priceForCertainItem, setPriceForCertainItem] = useState("");
 	const [oneTimeSaleForCertainItem, setOneTimeSaleForCertainItem] =
 		useState("");
-	const [insts, setInsts] = useState([]);
-	const [vouchs, setVouchs] = useState([]);
-	const [webs, setWebsites] = useState([]);
+	const [selectedInstalments, setSelectedInstalments] = useState([]);
+	const [selectedVouchers, setSelectedVouchers] = useState([]);
+	const [selectedWebsites, setSelectedWebsites] = useState([]);
 	const [searchProductWithCode, setSearchProductWithCode] = useState("");
 	const [showNextStep, setShowNextStep] = useState(false);
 	// const navigate = useNavigate();
@@ -156,9 +79,9 @@ const StartCreatingInvoicePage = () => {
 		}
 		setShowNextStep(true);
 
-		setInsts(installsTemp);
-		setVouchs(vouchersTemp);
-		setWebsites(websitesTemp);
+		setSelectedInstalments(installsTemp);
+		setSelectedVouchers(vouchersTemp);
+		setSelectedWebsites(websitesTemp);
 
 	};
 
@@ -279,7 +202,7 @@ const StartCreatingInvoicePage = () => {
 							</div>
 						</form>
 					</div>
-				{ showNextStep ? <UserDetailsForm productsData={addedItems} insts={insts} vouchers={vouchs} websites={webs} chosenGroupFromFirstStep={incomingQuery} /> : null }
+				{ showNextStep ? <UserDetailsForm productsData={addedItems} instalments={selectedInstalments} vouchers={selectedVouchers} websites={selectedWebsites} chosenGroupFromFirstStep={incomingQuery} /> : null }
 				</div>
 			</div>
 			{ !showNextStep ? <Button

@@ -14,33 +14,24 @@ const routes = [
 	},
 	{
 		path: "/choose-group",
-		element: 
+		element: (
 			<>
 				<Navbar />
 				<ChooseGroupPage />
 			</>
-		,
+		),
 	},
 	{
 		path: "/start-creating-invoice",
-		element: 
+		element: (
 			<>
 				<Navbar />
 				<StartCreatingInvoicePage />
 			</>
-		,
+		),
 	},
-	// {
-	// 	path: "/add-user-details-to-invoice",
-	// 	element: (
-	// 		<>
-	// 			<Navbar />
-	// 			<UserDetailsForInvoice />
-	// 		</>
-	// 	),
-	// },
 	{
-		path: "/start-creating-invoice/proceed-with-invoice-creation",
+		path: "/finished-invoice",
 		element: <FinishedInvoicePage />,
 	},
 	{
@@ -54,7 +45,7 @@ const routes = [
 	},
 	{
 		path: "*",
-		element: <NotFoundPage />
+		element: <NotFoundPage />,
 	},
 ];
 

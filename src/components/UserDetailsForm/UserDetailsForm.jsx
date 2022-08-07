@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import queryString from "query-string";
 
-import { SquareInputField } from 'components/Common';
+import { SquareInputField } from "components/Common";
 import NextStepOrSaveButton from "./NextStepOrSaveButton";
 import SecondStepOfCreatingInvoice from "./SecondStepOfCreatingInvoice";
 
-const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFromFirstStep }) => {
+const UserDetailsForm = ({
+	productsData,
+	instalments,
+	vouchers,
+	websites,
+	chosenGroupFromFirstStep,
+}) => {
 	const [chosenGroup, setChosenGroup] = useState("");
 	const [proceed, setProceed] = useState(false);
 	const [idNumber, setIdNumber] = useState("");
@@ -18,7 +24,6 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 	const [paymentMethod, setPaymentMethod] = useState("");
 	const navigate = useNavigate();
 
-
 	const dataToPassNextComponent = {
 		address,
 		branch,
@@ -28,8 +33,11 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 		mobileNumber,
 		numberForCard: numberToFillCard,
 		paymentMethod,
-		productsData
-	}
+		productsData,
+		instalments,
+		vouchers,
+		websites,
+	};
 
 	useEffect(() => {
 		const parsedQuery = queryString.parse(document.location.search);
@@ -72,29 +80,7 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 		setProceed(true);
 	};
 
-	let urlToProceed = `
-	proceed-with-invoice-creation?idNumber=${idNumber}&address=${address}&mobileNumber=${mobileNumber}&email=${email}&numberForCard=${numberToFillCard}&branch=${branch}&chosenGroup=${chosenGroup}&paymentMethod=${paymentMethod}
-	`;
-
-	if (chosenGroupFromFirstStep) {
-		urlToProceed += `&chosenGroup=${chosenGroupFromFirstStep}`;
-	}
-
-	if (productsData.length) {
-		urlToProceed += `&productsData=${productsData}`;
-	}
-
-	if (insts.length) {
-		urlToProceed += `&instalments=${insts}`;
-	}
-
-	if (vouchers.length) {
-		urlToProceed += `&vouchers=${vouchers}`;
-	}
-
-	if (websites.length) {
-		urlToProceed += `&websites=${websites}`;
-	}
+	const urlToProceed = `/finished-invoice`;
 
 	return (
 		<div className="mt-10 sm:mt-0 flex h-screen items-center">
@@ -147,13 +133,17 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 							<NextStepOrSaveButton
 								onClick={e => nextStepHandler(e)}
 								content="შემდეგი"
-								customClassName='ml-5 mb-5'
+								customClassName="ml-5 mb-5"
 							/>
 						) : (
 							<NextStepOrSaveButton
-								customClassName='ml-5 mb-5'
-								onClick={() => navigate(urlToProceed, { state: dataToPassNextComponent})}
-								content='შენახვა'
+								customClassName="ml-5 mb-5"
+								onClick={() =>
+									navigate(urlToProceed, {
+										state: dataToPassNextComponent,
+									})
+								}
+								content="შენახვა"
 							/>
 						)}
 					</div>
@@ -163,4 +153,4 @@ const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFro
 	);
 };
 
-export default CreateInvoice;
+export default UserDetailsForm;
