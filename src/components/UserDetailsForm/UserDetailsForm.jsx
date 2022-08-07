@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import queryString from "query-string";
 
-import { SquareInputField } from "./Input/InputField";
-import NextStepOrSaveButton from "./InvoiceUserDetailsComponents/NextStepOrSaveButton";
-import SecondStepOfCreatingInvoice from "./InvoiceUserDetailsComponents/SecondStepOfCreatingInvoice";
+import { SquareInputField } from 'components/Common';
+import NextStepOrSaveButton from "./NextStepOrSaveButton";
+import SecondStepOfCreatingInvoice from "./SecondStepOfCreatingInvoice";
 
 const CreateInvoice = ({ productsData, insts, vouchers, websites, chosenGroupFromFirstStep }) => {
 	const [chosenGroup, setChosenGroup] = useState("");

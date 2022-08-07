@@ -3,6 +3,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Link, useNavigate } from "react-router-dom";
 
+import groupsData from "./groupsData";
+
 const classNames = (...classes) => {
 	return classes.filter(Boolean).join(" ");
 };
@@ -24,7 +26,7 @@ const SingleDropdownItem = ({ fieldName }) => {
 	);
 };
 
-const ChooseCategory = ({ categoriesData }) => {
+const ChooseCategory = ({ categoriesData = groupsData }) => {
 	const navigate = useNavigate();
 	return (
 		<>

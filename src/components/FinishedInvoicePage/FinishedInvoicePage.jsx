@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import queryString from "query-string";
 import { nanoid } from "nanoid";
 
-import Button from "./Button/Button";
-import SingleField from "./ProceedWithInvoiceCreationComponents/SingleField";
+import Button from "components/Common/Button";
+import SingleField from "./SingleField";
 
 const ProceedWithInvoiceCreation = () => {
 	const [isReadyForPrint, setIsReadyForPrint] = useState(false);
@@ -30,9 +29,7 @@ const ProceedWithInvoiceCreation = () => {
 		setIsReadyForPrint(false);
 	}, [isReadyForPrint]);
 
-	let sumOfProducts = productsData.reduce(
-		(a, b) => parseInt(a.price) + parseInt(b.price)
-	);
+	let sumOfProducts = productsData.reduce((a, b) => (a + +b.price), 0);
 
 	if (chosenGroup === "დიპლომატი") {
 		sumOfProducts = sumOfProducts - (18 * (sumOfProducts / 100));
@@ -130,7 +127,7 @@ const ProceedWithInvoiceCreation = () => {
 									Discount
 								</th>
 								<td className="pl-3 pr-4 pt-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
-									-18% (დიპლომატი)
+									-18%
 								</td>
 
 								<tr>
@@ -156,7 +153,7 @@ const ProceedWithInvoiceCreation = () => {
 						<th
 							scope="row"
 							colSpan={3}
-							className="hidden pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell md:pl-0 font-bold">
+							className="hidden pt-6 text-right text-sm text-gray-500 sm:table-cell md:pl-0 font-bold">
 							ჯამი:
 						</th>
 						<td className="pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">

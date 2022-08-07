@@ -1,7 +1,7 @@
-import Button from "../Button/Button";
+import Button from "../Common/Button";
 
-import TableHeader from "../Table/TableHeader";
-import TableRowItem from "../Table/TableRowItem";
+import TableHeader from "../Common/Table/TableHeader";
+import TableRowItem from "../Common/Table/TableRowItem";
 
 const Table = ({ data, togglePopup }) => {
 	return (

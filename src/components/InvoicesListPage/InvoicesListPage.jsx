@@ -1,9 +1,10 @@
 import { useState } from "react";
-import Table from "./InvoicesListPageComponents/Table";
-import invoices from "./InvoicesListPageComponents/invoicesData";
-import SendEmailPopup from "./InvoicesListPageComponents/SendEmailPopup";
 
-const InvoicesListPage = () => {
+import Table from "./Table";
+import invoices from "./invoicesData";
+import SendEmailPopup from "./SendEmailPopup";
+
+const InvoicesList = () => {
 	const [showPopup, setShowPopup] = useState(false);
 
 	const togglePopup = () => {
@@ -47,4 +48,4 @@ const InvoicesListPage = () => {
 	);
 };
 
-export default InvoicesListPage;
+export default InvoicesList;

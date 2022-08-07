@@ -1,0 +1,1 @@
+export { default as ChooseGroupPage } from './ChooseGroupPage';

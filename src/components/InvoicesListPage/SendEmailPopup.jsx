@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { SquareInputField } from "../Input/InputField";
+import { SquareInputField } from "components/Common";
 
 const SendEmailPopup = ({ changePopupState }) => {
 	const [open, setOpen] = useState(true);

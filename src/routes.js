@@ -1,14 +1,10 @@
-import LoginPage from "./components/Login";
-import ChooseGroup from "./components/ChooseGroup";
-import StartCreatingInvoice from "./components/StartCreatingInvoice";
-import InvoiceUserDetails from "./components/InvoiceUserDetails";
-import ProcoeedWithInvoiceCreation from "./components/ProceedWithInvoiceCreation";
-import NotFoundResponse from "./components/NotFoundResponse";
-import InvoicesListPage from "./components/InvoicesListPage";
-import Navbar from "./components/Navbar";
-import StepsCount from './components/StepsCount';
-
-import groupsData from "./groupComponentsData";
+import { LoginPage } from "components/LoginPage";
+import { ChooseGroupPage } from "components/ChooseGroupPage";
+import { StartCreatingInvoicePage } from "components/StartCreatingInvoicePage";
+import { FinishedInvoicePage } from "components/FinishedInvoicePage";
+import { NotFoundPage } from "components/NotFoundPage";
+import { InvoicesListPage } from "components/InvoicesListPage";
+import { Navbar } from "components/Common";
 
 // Must add permissions for certain routes later
 const routes = [
@@ -21,7 +17,7 @@ const routes = [
 		element: 
 			<>
 				<Navbar />
-				<ChooseGroup categoriesData={groupsData} />
+				<ChooseGroupPage />
 			</>
 		,
 	},
@@ -30,22 +26,22 @@ const routes = [
 		element: 
 			<>
 				<Navbar />
-				<StartCreatingInvoice />
+				<StartCreatingInvoicePage />
 			</>
 		,
 	},
-	{
-		path: "/add-user-details-to-invoice",
-		element: (
-			<>
-				<Navbar />
-				<InvoiceUserDetails />
-			</>
-		),
-	},
+	// {
+	// 	path: "/add-user-details-to-invoice",
+	// 	element: (
+	// 		<>
+	// 			<Navbar />
+	// 			<UserDetailsForInvoice />
+	// 		</>
+	// 	),
+	// },
 	{
 		path: "/start-creating-invoice/proceed-with-invoice-creation",
-		element: <ProcoeedWithInvoiceCreation />,
+		element: <FinishedInvoicePage />,
 	},
 	{
 		path: "/invoices-list",
@@ -58,7 +54,7 @@ const routes = [
 	},
 	{
 		path: "*",
-		element: <NotFoundResponse />,
+		element: <NotFoundPage />
 	},
 ];
 

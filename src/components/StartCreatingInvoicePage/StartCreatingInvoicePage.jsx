@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
-import { SimpleSingleListItem } from "./StartCreatingInvoiceComponents/SingleListItem";
-import { RoundedInputField } from "./Input/InputField";
-import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
-import InvoiceUserDetails from './InvoiceUserDetails';
-import Button from "./Button/Button";
-import TableRowItem from "./Table/TableRowItem";
-import TableHeader from "./Table/TableHeader";
+import { Button, TableHeader, TableRowItem, RoundedInputField } from "components/Common";
+import { SimpleSingleListItem } from "./SingleListItem";
+import { UserDetailsForm } from "components/UserDetailsForm";
 
-import ListRow from "./StartCreatingInvoiceComponents/ListRow";
+
+import ListRow from "./ListRow";
 
 const instalments = {
 	headerName: "განვადებები",
@@ -91,7 +88,7 @@ const websites = {
 
 const categoriesArr = [instalments, vouchers, websites];
 
-const StartCreatingInvoice = () => {
+const StartCreatingInvoicePage = () => {
 	const [addedItems, setAddedItems] = useState([]);
 	const [incomingQuery, setIncomingQuery] = useState('');
 	const [nameForCertainItem, setNameForCertainItem] = useState("");
@@ -176,6 +173,11 @@ const StartCreatingInvoice = () => {
 			</div>
 
 			<div className="px-4 sm:px-6 lg:px-8">
+				<SimpleSingleListItem
+					content="წინასწარი შეკვეთა"
+					customClassName="mt-5"
+				/>
+				<br />
 				<div className="sm:flex sm:items-center">
 					<div className="sm:flex-auto">
 						<h1 className="text-xl font-semibold text-gray-900">
@@ -184,10 +186,6 @@ const StartCreatingInvoice = () => {
 					</div>
 				</div>
 
-				<SimpleSingleListItem
-					content="წინასწარი შეკვეთა"
-					customClassName="mt-5"
-				/>
 				<div className="mt-8 flex flex-col">
 					<div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
 						<div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -281,7 +279,7 @@ const StartCreatingInvoice = () => {
 							</div>
 						</form>
 					</div>
-				{ showNextStep ? <InvoiceUserDetails productsData={addedItems} insts={insts} vouchers={vouchs} websites={webs} chosenGroupFromFirstStep={incomingQuery} /> : null }
+				{ showNextStep ? <UserDetailsForm productsData={addedItems} insts={insts} vouchers={vouchs} websites={webs} chosenGroupFromFirstStep={incomingQuery} /> : null }
 				</div>
 			</div>
 			{ !showNextStep ? <Button
@@ -293,4 +291,4 @@ const StartCreatingInvoice = () => {
 	);
 };
 
-export default StartCreatingInvoice;
+export default StartCreatingInvoicePage;
