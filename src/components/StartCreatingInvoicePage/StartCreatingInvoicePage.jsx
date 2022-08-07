@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
 import queryString from "query-string";
 
-import { Button, TableHeader, TableRowItem, RoundedInputField } from "components/Common";
+import {
+	Button,
+	TableHeader,
+	TableRowItem,
+	RoundedInputField,
+} from "components/Common";
 import { SimpleSingleListItem } from "./SingleListItem";
 import { UserDetailsForm } from "components/UserDetailsForm";
 import ListRow from "./ListRow";
 
-import { instalments, vouchers, websites } from './checkFields';
-
+import { instalments, vouchers, websites } from "./checkFields";
 
 const categoriesArr = [instalments, vouchers, websites];
 
 const StartCreatingInvoicePage = () => {
 	const [addedItems, setAddedItems] = useState([]);
-	const [incomingQuery, setIncomingQuery] = useState('');
+	const [incomingQuery, setIncomingQuery] = useState("");
 	const [nameForCertainItem, setNameForCertainItem] = useState("");
 	const [priceForCertainItem, setPriceForCertainItem] = useState("");
 	const [oneTimeSaleForCertainItem, setOneTimeSaleForCertainItem] =
@@ -24,7 +28,6 @@ const StartCreatingInvoicePage = () => {
 	const [searchProductWithCode, setSearchProductWithCode] = useState("");
 	const [showNextStep, setShowNextStep] = useState(false);
 	// const navigate = useNavigate();
-
 
 	useEffect(() => {
 		const parsedQuery = queryString.parse(document.location.search);
@@ -65,15 +68,24 @@ const StartCreatingInvoicePage = () => {
 			websitesTemp = [];
 
 		for (let i = 0; i < largestArray; i++) {
-			if (instalments.listOfCategories[i] && instalments.listOfCategories[i].isChecked) {
+			if (
+				instalments.listOfCategories[i] &&
+				instalments.listOfCategories[i].isChecked
+			) {
 				installsTemp.push(instalments.listOfCategories[i].name);
 			}
 
-			if (vouchers.listOfCategories[i] && vouchers.listOfCategories[i].isChecked) {
+			if (
+				vouchers.listOfCategories[i] &&
+				vouchers.listOfCategories[i].isChecked
+			) {
 				vouchersTemp.push(vouchers.listOfCategories[i].name);
 			}
 
-			if (websites.listOfCategories[i] && websites.listOfCategories[i].isChecked) {
+			if (
+				websites.listOfCategories[i] &&
+				websites.listOfCategories[i].isChecked
+			) {
 				websitesTemp.push(websites.listOfCategories[i].name);
 			}
 		}
@@ -82,7 +94,15 @@ const StartCreatingInvoicePage = () => {
 		setSelectedInstalments(installsTemp);
 		setSelectedVouchers(vouchersTemp);
 		setSelectedWebsites(websitesTemp);
+	};
 
+	const dataToPassToNextComponent = {
+		oneTimeSaleForCertainItem,
+		productsData: addedItems,
+		instalments: selectedInstalments,
+		vouchers: selectedVouchers,
+		websites: selectedWebsites,
+		chosenGroupFromFirstStep: incomingQuery,
 	};
 
 	return (
@@ -178,14 +198,6 @@ const StartCreatingInvoicePage = () => {
 											value={oneTimeSaleForCertainItem}
 											type="number"
 										/>
-										<RoundedInputField
-											placeholder="პროდუქტის კოდით მოძებნა"
-											formDataHandler={inputedPrice =>
-												setSearchProductWithCode(inputedPrice)
-											}
-											value={searchProductWithCode}
-											type="number"
-										/>
 									</div>
 								</div>
 							</div>
@@ -200,16 +212,32 @@ const StartCreatingInvoicePage = () => {
 									</button>
 								</div>
 							</div>
+							<div className="space-y-8 divide-y divide-gray-200 sm:space-y-5 w-1/3">
+								<RoundedInputField
+									placeholder="პროდუქტის კოდით მოძებნა"
+									formDataHandler={inputedPrice =>
+										setSearchProductWithCode(inputedPrice)
+									}
+									value={searchProductWithCode}
+									type="text"
+								/>
+							</div>
 						</form>
 					</div>
-				{ showNextStep ? <UserDetailsForm productsData={addedItems} instalments={selectedInstalments} vouchers={selectedVouchers} websites={selectedWebsites} chosenGroupFromFirstStep={incomingQuery} /> : null }
+					{showNextStep ? (
+						<UserDetailsForm
+							dataToPassToNextComponent={dataToPassToNextComponent}
+						/>
+					) : null}
 				</div>
 			</div>
-			{ !showNextStep ? <Button
-				content="შემდეგი"
-				onClick={() => continueOnNextPage()}
-				customClassName="float-right mr-6"
-			/> : null }
+			{!showNextStep ? (
+				<Button
+					content="შემდეგი"
+					onClick={() => continueOnNextPage()}
+					customClassName="float-right mr-6"
+				/>
+			) : null}
 		</div>
 	);
 };

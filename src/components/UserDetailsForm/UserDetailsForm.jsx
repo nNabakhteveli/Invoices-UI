@@ -7,10 +7,7 @@ import NextStepOrSaveButton from "./NextStepOrSaveButton";
 import SecondStepOfCreatingInvoice from "./SecondStepOfCreatingInvoice";
 
 const UserDetailsForm = ({
-	productsData,
-	instalments,
-	vouchers,
-	websites,
+	dataToPassToNextComponent,
 	chosenGroupFromFirstStep,
 }) => {
 	const [chosenGroup, setChosenGroup] = useState("");
@@ -24,7 +21,8 @@ const UserDetailsForm = ({
 	const [paymentMethod, setPaymentMethod] = useState("");
 	const navigate = useNavigate();
 
-	const dataToPassNextComponent = {
+	dataToPassToNextComponent = {
+		...dataToPassToNextComponent,
 		address,
 		branch,
 		chosenGroup,
@@ -33,10 +31,6 @@ const UserDetailsForm = ({
 		mobileNumber,
 		numberForCard: numberToFillCard,
 		paymentMethod,
-		productsData,
-		instalments,
-		vouchers,
-		websites,
 	};
 
 	useEffect(() => {
@@ -140,7 +134,7 @@ const UserDetailsForm = ({
 								customClassName="ml-5 mb-5"
 								onClick={() =>
 									navigate(urlToProceed, {
-										state: dataToPassNextComponent,
+										state: dataToPassToNextComponent,
 									})
 								}
 								content="შენახვა"
